@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect - Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="auth-styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-section">
+                    <i class="fas fa-seedling"></i>
+                    <h1>FarmConnect</h1>
+                    <p>Connect. Trade. Grow.</p>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form">
+                <h2>Join FarmConnect</h2>
+                <p class="subtitle">Create your farmer account</p>
+                <p class="text-warning" style="font-size:0.95em;">You must verify your email with the OTP sent to you before you can log in.</p>
+                
+                <form onsubmit="register(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerName">
+                                <i class="fas fa-user"></i>
+                                Full Name
+                            </label>
+                            <input type="text" id="registerName" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="registerEmail" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerPassword">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <input type="password" id="registerPassword" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPhone">
+                                <i class="fas fa-phone"></i>
+                                Phone Number
+                            </label>
+                            <input type="tel" id="registerPhone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerLocation">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Location
+                        </label>
+                        <input type="text" id="registerLocation" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Sign in here</a></p>
+                </div>
+            </div>
+
+            <!-- OTP Verification Form -->
+            <div id="otpForm" class="auth-form d-none">
+                <h2>Verify Your Email</h2>
+                <p class="subtitle">Enter the 6-digit code sent to your email</p>
+                
+                <form onsubmit="verifyOTP(event)">
+                    <div class="form-group">
+                        <label for="otpCode">Verification Code</label>
+                        <input type="text" id="otpCode" class="form-control otp-input" 
+                               placeholder="000000" maxlength="6" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-check"></i>
+                        Verify Email
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Didn't receive the code? <a href="#" onclick="resendOTP()">Resend OTP</a></p>
+                    <p><a href="login.html">Back to Login</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth-background">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

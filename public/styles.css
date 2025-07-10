@@ -1,0 +1,317 @@
+/* Custom Styles for FarmConnect */
+
+:root {
+    --primary-green: #28a745;
+    --secondary-green: #20c997;
+    --light-green: #d4edda;
+    --dark-green: #155724;
+    --gradient-green: linear-gradient(135deg, #28a745, #20c997);
+}
+
+body {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cards */
+.card {
+    transition: all 0.3s ease;
+    border-radius: 15px !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+/* Buttons */
+.btn-success {
+    background: var(--gradient-green);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+/* Form Controls */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Post Cards */
+.post-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.post-image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    color: var(--primary-green);
+    transform: scale(1.1);
+}
+
+.action-btn.active {
+    color: var(--primary-green);
+}
+
+/* Profile Image */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--light-green);
+}
+
+/* Messages */
+.conversation-item {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.conversation-item:hover {
+    background-color: var(--light-green);
+}
+
+.conversation-item.active {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.message-sent {
+    background: var(--gradient-green);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+}
+
+.message-received {
+    background: #f8f9fa;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-bottom: 80px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .post-actions {
+        justify-content: space-around;
+    }
+    
+    .message-bubble {
+        max-width: 85%;
+    }
+}
+
+/* Success/Error Messages */
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+.alert-success {
+    background: var(--light-green);
+    color: var(--dark-green);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-green);
+}
+
+/* Badge Styles */
+.badge {
+    border-radius: 15px;
+    font-size: 0.75rem;
+}
+
+/* Crop Info Styles */
+.crop-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.crop-info-item {
+    background: var(--light-green);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    color: var(--dark-green);
+}
+
+/* Stats Cards */
+.stats-card {
+    text-align: center;
+    padding: 20px;
+    background: var(--gradient-green);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* Tips Section */
+.tips-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tips-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tips-list li:last-child {
+    border-bottom: none;
+}
+
+/* Modal Customization */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+}
+
+.modal-header {
+    background: var(--gradient-green);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Bottom Navigation */
+.fixed-bottom .nav-link {
+    padding: 10px 5px;
+    font-size: 0.8rem;
+}
+
+.fixed-bottom .nav-link i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+/* Wishlist Heart Animation */
+.wishlist-btn.active {
+    color: #dc3545 !important;
+    animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+/* Like Button Animation */
+.like-btn.active {
+    animation: likeAnimation 0.5s ease-in-out;
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
