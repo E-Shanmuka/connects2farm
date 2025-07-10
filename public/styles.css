@@ -71,7 +71,7 @@ body {
 
 .post-image {
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
 }
 
