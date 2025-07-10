@@ -282,13 +282,14 @@ body {
 
 /* Bottom Navigation */
 .fixed-bottom .nav-link {
-    padding: 10px 5px;
+    padding: 2px 0;
     font-size: 0.8rem;
 }
 
-.fixed-bottom .nav-link i {
-    font-size: 1.2rem;
-    margin-bottom: 2px;
+.fixed-bottom{
+    position:fixed;
+    height:60px;
+    z-index:1000;
 }
 
 /* Wishlist Heart Animation */
