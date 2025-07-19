@@ -303,6 +303,103 @@ function createPostElement(post) {
     return div;
 }
 
+//delte option for blogs
+
+
+// ... existing code ...
+
+function createPostElement(post) {
+    const div = document.createElement('div');
+    div.className = 'card mb-4 border-0 shadow-sm post-card';
+    const isOwner = currentUser && post.user_id == currentUser.id;
+    const statusLabel = post.sold ? '<span class="badge bg-danger ms-2">Sold</span>' : '<span class="badge bg-success ms-2">Available</span>';
+    const statusButton = isOwner ? `<button class="btn btn-sm btn-outline-${post.sold ? 'success' : 'danger'} ms-2" onclick="toggleSoldStatus(${post.id}, ${!post.sold})">Mark as ${post.sold ? 'Available' : 'Sold'}</button>` : '';
+    const deleteButton = isOwner ? `<button class="btn btn-sm btn-outline-danger ms-1" onclick="deletePost(${post.id})" title="Delete Post">
+        <i class="fas fa-trash"></i>
+    </button>` : '';
+    const imageHtml = post.image ? 
+        `<img src="/uploads/${post.image}" class="post-image w-100" alt="Crop image">` : '';
+    div.innerHTML = `
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <img src="${post.user_image ? '/uploads/' + post.user_image : 'https://via.placeholder.com/40'}" 
+                     class="profile-img me-3" alt="Profile">
+                <div>
+                    <h6 class="mb-0">${post.user_name}</h6>
+                    <small class="text-muted">${formatDate(post.created_at)}</small>
+                </div>
+                <div class="ms-auto">
+                    ${deleteButton}
+                    <button class="btn btn-sm btn-outline-danger" onclick="showReportModal(${post.id}, ${post.user_id})">
+                        <i class="fas fa-flag"></i>
+                    </button>
+                </div>
+            </div>
+            ${imageHtml}
+            <h5 class="text-success mt-3">${post.crop_name} ${statusLabel} ${statusButton}</h5>
+            <div class="crop-info">
+                <span class="crop-info-item">
+                    <i class="fas fa-map-marker-alt me-1"></i>${post.area} acres
+                </span>
+                <span class="crop-info-item">
+                    <i class="fas fa-phone me-1"></i>${post.phone}
+                </span>
+                ${post.location ? `<span class="crop-info-item">
+                    <i class="fas fa-location-dot me-1"></i>${post.location}
+                </span>` : ''}
+                ${post.price ? `<span class="crop-info-item">
+                    <i class="fas fa-dollar-sign me-1"></i>₹${post.price}
+                </span>` : ''}
+                ${post.quantity ? `<span class="crop-info-item">
+                    <i class="fas fa-weight me-1"></i>${post.quantity}
+                </span>` : ''}
+            </div>
+            ${post.description ? `<p class="text-muted mt-2">${post.description}</p>` : ''}
+            <div class="post-actions">
+                <button class="action-btn like-btn" onclick="toggleLike(${post.id}, this)">
+                    <i class="fas fa-thumbs-up me-1"></i>
+                    <span>${post.likes_count || 0}</span>
+                </button>
+                <button class="action-btn" onclick="showComments(${post.id})">
+                    <i class="fas fa-comment me-1"></i>
+                    <span>${post.comments_count || 0}</span>
+                </button>
+                <button class="action-btn wishlist-btn" onclick="toggleWishlist(${post.id}, this)">
+                    <i class="fas fa-heart me-1"></i>
+                    Wishlist
+                </button>
+                <button class="action-btn" onclick="startChat(${post.user_id})">
+                    <i class="fas fa-message me-1"></i>
+                    Message
+                </button>
+            </div>
+        </div>
+    `;
+    return div;
+}
+
+// ... existing code ...
+
+// Add the delete post function (add this after the createPost function)
+async function deletePost(postId) {
+    if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        await apiCall(`/posts/${postId}`, 'DELETE');
+        showAlert('Post deleted successfully!', 'success');
+        loadPosts(); // Reload posts to update the display
+    } catch (error) {
+        console.error('Failed to delete post:', error);
+        showAlert('Failed to delete post. Please try again.', 'danger');
+    }
+}
+
+// ... existing code ...
+
+
+//delete option for blogs end
 // Show Sell Crop form only when button is clicked
 window.showSellCropForm = function() {
     const formCard = document.getElementById('sellCropFormCard');
