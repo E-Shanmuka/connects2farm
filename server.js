@@ -434,6 +434,49 @@ app.post('/api/posts', authenticateToken, upload.single('image'), (req, res) => 
   );
 });
 
+//delete option for blogs
+
+// ... existing code ...
+
+// Get comments
+app.get('/api/posts/:id/comments', (req, res) => {
+  const postId = req.params.id;
+
+  const query = `
+    SELECT c.*, u.name as user_name, u.profile_image as user_image
+    FROM comments c
+    JOIN users u ON c.user_id = u.id
+    WHERE c.post_id = ?
+    ORDER BY c.created_at DESC
+  `;
+
+  db.execute(query, [postId], (err, results) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.json(results);
+  });
+});
+
+// Delete post (owner only)
+app.delete('/api/posts/:id', authenticateToken, (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user.userId;
+
+  // First check if the post exists and belongs to the user
+  db.execute('SELECT * FROM posts WHERE id = ? AND user_id = ?', [postId, userId], (err, results) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    if (results.length === 0) return res.status(403).json({ error: 'Not authorized or post not found' });
+
+    // Delete the post (cascade will handle related data)
+    db.execute('DELETE FROM posts WHERE id = ? AND user_id = ?', [postId, userId], (err) => {
+      if (err) return res.status(500).json({ error: 'Failed to delete post' });
+      res.json({ message: 'Post deleted successfully' });
+    });
+  });
+});
+
+// ... existing code ...
+//delete option for blog end
+
 // Like/Unlike post
 app.post('/api/posts/:id/like', authenticateToken, (req, res) => {
   const postId = req.params.id;
